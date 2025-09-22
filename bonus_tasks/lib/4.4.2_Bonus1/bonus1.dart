@@ -70,7 +70,9 @@ class _CountersScreenState extends State<CountersScreen> {
                 });
               },
               child: Container(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: counters.values.toList()[i] >= 6
+                    ? Colors.green
+                    : Theme.of(context).colorScheme.primaryContainer,
                 width: 300,
                 height: 150,
                 alignment: Alignment.center,
