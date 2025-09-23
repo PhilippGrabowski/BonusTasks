@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 final Map<int, int> counters = {0: 0, 1: 0, 2: 0};
 
-class Bonus1 extends StatefulWidget {
-  const Bonus1({super.key});
+class Bonus1In442 extends StatefulWidget {
+  const Bonus1In442({super.key});
 
   @override
-  State<Bonus1> createState() => _Bonus1State();
+  State<Bonus1In442> createState() => _Bonus1In442State();
 }
 
-class _Bonus1State extends State<Bonus1> {
+class _Bonus1In442State extends State<Bonus1In442> {
   int _navigationIndex = 0;
 
   @override
