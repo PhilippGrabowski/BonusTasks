@@ -10,6 +10,7 @@ class AboutMe extends StatelessWidget {
 
     return Column(
       children: [
+        const SizedBox(height: 40),
         CircleAvatar(
           radius: 80,
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
@@ -27,7 +28,7 @@ class AboutMe extends StatelessWidget {
                 )
               : null,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 40),
         Text(
           '${person.firstname} ${person.lastname}',
           style: TextStyle(
