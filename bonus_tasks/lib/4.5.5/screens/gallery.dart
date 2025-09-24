@@ -83,6 +83,7 @@ class GalleryList extends StatelessWidget {
                 children: [
                   Image.network(
                     favoritePlaces[index].imageUrl,
+                    width: double.infinity,
                     height: 120,
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
