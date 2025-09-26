@@ -1,8 +1,8 @@
 import 'package:bonus_tasks/4.5.5/models/favorite_place.dart';
 import 'package:flutter/material.dart';
 
-class Details extends StatelessWidget {
-  const Details({super.key, required place}) : _place = place;
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({super.key, required place}) : _place = place;
 
   final FavoritePlace _place;
 

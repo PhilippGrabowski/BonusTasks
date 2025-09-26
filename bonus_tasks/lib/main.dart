@@ -1,7 +1,7 @@
 import 'package:bonus_tasks/4.4.2/bonus/bonus1.dart';
 import 'package:bonus_tasks/4.4.3/aufgabe1.dart';
 import 'package:bonus_tasks/4.4.3/bonus/bonus1.dart';
-import 'package:bonus_tasks/4.5.5/screens/gallery.dart';
+import 'package:bonus_tasks/4.5.5/gallery.dart';
 import 'package:flutter/material.dart';
 
 void main() {

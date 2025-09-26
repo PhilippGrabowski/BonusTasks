@@ -1,8 +1,8 @@
 import 'package:bonus_tasks/4.5.5/models/person.dart';
 import 'package:flutter/material.dart';
 
-class AboutMe extends StatelessWidget {
-  const AboutMe({super.key});
+class AboutMeScreen extends StatelessWidget {
+  const AboutMeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
