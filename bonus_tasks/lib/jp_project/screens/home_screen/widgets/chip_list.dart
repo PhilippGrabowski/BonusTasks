@@ -1,6 +1,6 @@
 import 'package:bonus_tasks/jp_project/data/mock_data.dart';
 import 'package:bonus_tasks/jp_project/models/category_filter.dart';
-import 'package:bonus_tasks/jp_project/models/snack.dart';
+
 import 'package:bonus_tasks/jp_project/widgets/blur_container.dart';
 import 'package:flutter/material.dart';
 

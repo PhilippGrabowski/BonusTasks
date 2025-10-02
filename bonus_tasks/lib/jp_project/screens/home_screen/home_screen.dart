@@ -1,10 +1,9 @@
-import 'dart:math' as math;
-
 import 'package:bonus_tasks/jp_project/data/mock_data.dart';
 import 'package:bonus_tasks/jp_project/models/snack.dart';
 import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/chip_list.dart';
 import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/snack_info_blur_card.dart';
-import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/snack_info_card.dart';
+import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/snack_info_carousel/snack_info_card.dart';
+import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/snack_info_carousel/snack_info_carousel.dart';
 import 'package:bonus_tasks/jp_project/widgets/blur_container.dart';
 import 'package:flutter/material.dart';
 
@@ -103,20 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 50),
               Text('We Recommend', style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 17)),
               const SizedBox(height: 15),
-              if (filteredSnacks.isNotEmpty)
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    spacing: 30,
-                    children: [
-                      ...List.generate(
-                        filteredSnacks.length,
-                        (index) => SnackInfoCard(snack: filteredSnacks[index], onFavorite: () => onFavorite(index)),
-                      ),
-                      const SizedBox(),
-                    ],
-                  ),
-                ),
+              if (filteredSnacks.isNotEmpty) SnackInfoCarousel(snacks: filteredSnacks, onFavorite: onFavorite),
               if (filteredSnacks.isEmpty)
                 Container(
                   height: 200,
