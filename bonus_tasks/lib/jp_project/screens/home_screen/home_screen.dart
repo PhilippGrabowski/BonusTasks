@@ -2,7 +2,6 @@ import 'package:bonus_tasks/jp_project/data/mock_data.dart';
 import 'package:bonus_tasks/jp_project/models/snack.dart';
 import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/chip_list.dart';
 import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/snack_info_blur_card.dart';
-import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/snack_info_carousel/snack_info_card.dart';
 import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/snack_info_carousel/snack_info_carousel.dart';
 import 'package:bonus_tasks/jp_project/widgets/blur_container.dart';
 import 'package:flutter/material.dart';
@@ -34,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
     getFilteredSnacks();
   }
 
-  void onFavorite(int index) {
+  void onFavorite(Snack snack) {
     setState(() {
-      snacks[index].toggleFavoriteStatus();
+      snacks.firstWhere((item) => item.name == snack.name).toggleFavoriteStatus();
     });
   }
 

@@ -9,7 +9,7 @@ class SnackInfoCarousel extends StatefulWidget {
   const SnackInfoCarousel({super.key, required this.snacks, required this.onFavorite});
 
   final List<Snack> snacks;
-  final void Function(int) onFavorite;
+  final void Function(Snack) onFavorite;
 
   @override
   State<SnackInfoCarousel> createState() => _SnackInfoCarouselState();
@@ -97,7 +97,7 @@ class _SnackInfoCarouselState extends State<SnackInfoCarousel> with SingleTicker
                   duration: const Duration(milliseconds: 400),
                   builder: (context) => SizedBox(
                     height: 818,
-                    child: CustomBottomSheet(snack: widget.snacks[index], onFavorite: () => widget.onFavorite),
+                    child: CustomBottomSheet(snack: widget.snacks[index], onFavorite: widget.onFavorite),
                   ),
                 );
                 _syncAnimationWithScroll();
@@ -107,7 +107,10 @@ class _SnackInfoCarouselState extends State<SnackInfoCarousel> with SingleTicker
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: SizedBox(
                   width: 200,
-                  child: SnackInfoCard(snack: widget.snacks[index], onFavorite: () => widget.onFavorite(index)),
+                  child: SnackInfoCard(
+                    snack: widget.snacks[index],
+                    onFavorite: () => widget.onFavorite(widget.snacks[index]),
+                  ),
                 ),
               ),
             );

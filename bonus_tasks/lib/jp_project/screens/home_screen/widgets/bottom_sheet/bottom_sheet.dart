@@ -1,4 +1,3 @@
-import 'package:bonus_tasks/jp_project/data/mock_data.dart';
 import 'package:bonus_tasks/jp_project/models/snack.dart';
 import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/bottom_sheet/widgets/circle_btn.dart';
 import 'package:bonus_tasks/jp_project/screens/home_screen/widgets/bottom_sheet/widgets/counter_row.dart';
@@ -13,7 +12,7 @@ class CustomBottomSheet extends StatefulWidget {
   const CustomBottomSheet({super.key, required this.snack, required this.onFavorite});
 
   final Snack snack;
-  final void Function() onFavorite;
+  final void Function(Snack) onFavorite;
 
   @override
   State<CustomBottomSheet> createState() => _CustomBottomSheetState();

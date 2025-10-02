@@ -11,7 +11,7 @@ class SnackDetailsCard extends StatefulWidget {
 
   final Snack snack;
   final int index;
-  final void Function() onFavorite;
+  final void Function(Snack) onFavorite;
 
   @override
   State<SnackDetailsCard> createState() => _SnackDetailsCardState();
@@ -24,7 +24,7 @@ class _SnackDetailsCardState extends State<SnackDetailsCard> {
       children: [
         Align(
           alignment: Alignment.topRight,
-          child: Likes(snack: widget.snack, onLike: () => setState(() => widget.onFavorite())),
+          child: Likes(snack: widget.snack, onLike: () => setState(() => widget.onFavorite(widget.snack))),
         ),
         const SizedBox(height: 10),
         Text(widget.snack.name, style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 22)),
