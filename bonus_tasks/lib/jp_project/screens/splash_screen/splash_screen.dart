@@ -46,8 +46,8 @@ class SplashScreen extends StatelessWidget {
                 colors: [Color.fromARGB(255, 0, 0, 0).withValues(alpha: 0.25), Colors.black],
                 stops: [0.3, 0.33],
               ).createShader(bounds),
-              blendMode: BlendMode.dstIn,
-              child: Image.asset('assets/images/snack_snack.png', fit: BoxFit.cover, width: double.infinity),
+              blendMode: BlendMode.dstIn, // zeigt das Bild nur dort, wo der Verlauf deckend ist
+              child: Image.asset('assets/images/snack_snack.png', fit: BoxFit.cover),
             ),
           ),
           Positioned(

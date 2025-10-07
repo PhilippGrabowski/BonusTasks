@@ -16,7 +16,7 @@ class SnackInfoCarousel extends StatefulWidget {
 }
 
 class _SnackInfoCarouselState extends State<SnackInfoCarousel> with SingleTickerProviderStateMixin {
-  late ScrollController _scrollController;
+  late ScrollController _scrollController; // überwacht Scrollzustand
   late AnimationController _animationController;
   bool _userScrolling = false;
 
@@ -24,17 +24,14 @@ class _SnackInfoCarouselState extends State<SnackInfoCarousel> with SingleTicker
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-
     _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 10))
-      ..addListener(_autoScroll);
+      ..addListener(_autoScroll); // automatisches scrollen
 
-    if (widget.snacks.length >= 3) {
-      _animationController.repeat(reverse: true);
-    }
+    _startAutoScroll();
   }
 
   void _autoScroll() {
-    if (!_scrollController.hasClients | _userScrolling) return;
+    if (!_scrollController.hasClients || _userScrolling) return;
     final maxScroll = _scrollController.position.maxScrollExtent;
     _scrollController.jumpTo(_animationController.value * maxScroll);
   }
@@ -44,9 +41,8 @@ class _SnackInfoCarouselState extends State<SnackInfoCarousel> with SingleTicker
   }
 
   void _startAutoScroll() {
-    if (widget.snacks.length >= 3) {
-      _animationController.repeat(reverse: true);
-    }
+    if (widget.snacks.length < 3) return;
+    _animationController.repeat(reverse: true);
   }
 
   void _syncAnimationWithScroll() {
@@ -72,6 +68,7 @@ class _SnackInfoCarouselState extends State<SnackInfoCarousel> with SingleTicker
       onNotification: (notification) {
         if (notification is UserScrollNotification) {
           if (notification.direction != ScrollDirection.idle) {
+            // Nutzer scrollt aktiv
             _userScrolling = true;
             _stopAutoScroll();
           } else {
@@ -92,7 +89,7 @@ class _SnackInfoCarouselState extends State<SnackInfoCarousel> with SingleTicker
                 _stopAutoScroll();
                 await showMaterialModalBottomSheet(
                   context: context,
-                  useRootNavigator: true,
+                  useRootNavigator: true, // um Animation im Hero Widget auszulösen
                   shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
                   duration: const Duration(milliseconds: 400),
                   builder: (context) => SizedBox(

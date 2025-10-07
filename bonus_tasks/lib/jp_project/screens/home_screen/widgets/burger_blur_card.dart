@@ -59,9 +59,9 @@ class CardShapeClipper extends CustomClipper<Path> {
     final double height = size.height;
     final double radius = 30;
 
-    path.moveTo(radius, 0);
+    path.moveTo(radius, 0); // default 0,0
     path.lineTo(width - radius, 0);
-    path.arcToPoint(Offset(width, radius), radius: Radius.circular(radius), clockwise: true);
+    path.arcToPoint(Offset(width, radius), radius: Radius.circular(radius), clockwise: true); // im Uhrzeigersinn
     path.lineTo(width, height * 0.8 - radius);
     path.arcToPoint(Offset(width - radius, height * 0.8), radius: Radius.circular(radius), clockwise: true);
     path.lineTo(radius, height);
@@ -74,7 +74,7 @@ class CardShapeClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false; // Pfad muss nicht neu gezeichnet werden
 }
 
 class CardShapePainter extends CustomPainter {
