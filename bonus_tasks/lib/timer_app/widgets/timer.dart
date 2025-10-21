@@ -17,7 +17,9 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    controller = ref.read(timerNotifierProvider).input == 0
+        ? TextEditingController()
+        : TextEditingController(text: ref.read(timerNotifierProvider).input.toString());
   }
 
   @override
@@ -78,7 +80,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
               ),
             ),
             FilledButton(
-              onPressed: controller.text.isEmpty
+              onPressed: controller.text.isEmpty && !timerState.isRunning
                   ? null
                   : timerState.isRunning
                   ? timerNotifier.stopTimer

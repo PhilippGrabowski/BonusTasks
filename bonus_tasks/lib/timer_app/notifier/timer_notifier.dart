@@ -3,13 +3,18 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TimerState {
-  const TimerState({required this.seconds, required this.isRunning});
+  const TimerState({required this.input, required this.seconds, required this.isRunning});
 
+  final int input;
   final int seconds;
   final bool isRunning;
 
-  TimerState copyWith({int? seconds, bool? isRunning}) {
-    return TimerState(seconds: seconds ?? this.seconds, isRunning: isRunning ?? this.isRunning);
+  TimerState copyWith({int? input, int? seconds, bool? isRunning}) {
+    return TimerState(
+      input: input ?? this.input,
+      seconds: seconds ?? this.seconds,
+      isRunning: isRunning ?? this.isRunning,
+    );
   }
 }
 
@@ -21,12 +26,12 @@ class TimerNotifier extends Notifier<TimerState> {
     ref.onDispose(() {
       _timer?.cancel();
     });
-    return const TimerState(seconds: 0, isRunning: false);
+    return const TimerState(input: 0, seconds: 0, isRunning: false);
   }
 
   void setSeconds(int seconds) {
     if (!state.isRunning) {
-      state = state.copyWith(seconds: seconds);
+      state = state.copyWith(input: seconds, seconds: seconds);
     }
   }
 
