@@ -29,7 +29,7 @@ class TimerNotifier extends Notifier<TimerState> {
     return const TimerState(input: 0, seconds: 0, isRunning: false);
   }
 
-  void setSeconds(int seconds) {
+  void setTimer(int seconds) {
     if (!state.isRunning) {
       state = state.copyWith(input: seconds, seconds: seconds);
     }

@@ -68,7 +68,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
                 maxLength: 4,
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly, _MinMaxValueFormatter(1, 5999)],
-                onChanged: (value) => timerNotifier.setSeconds(int.tryParse(value) ?? 0),
+                onChanged: (value) => timerNotifier.setTimer(int.tryParse(value) ?? 0),
               ),
             ),
             Text(
