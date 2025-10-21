@@ -4,37 +4,40 @@ import 'package:bonus_tasks/4.4.3/bonus/bonus1.dart';
 import 'package:bonus_tasks/4.5.5/gallery.dart';
 import 'package:bonus_tasks/jp_project/Theme/theme.dart';
 import 'package:bonus_tasks/jp_project/screens/splash_screen/splash_screen.dart';
+import 'package:bonus_tasks/timer_app/timer_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const App());
+  runApp(ProviderScope(child: const App()));
 }
 
 class App extends StatelessWidget {
   const App({super.key});
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     title: 'Bonus Tasks',
-  //     debugShowCheckedModeBanner: false,
-  //     theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 82, 34, 133))),
-  //     //home: const Bonus1In442(),
-  //     //home: const Aufgabe1In443(),
-  //     //home: const Bonus1In443(),
-  //     home: Gallery(),
-  //   );
-  // }
-
-  // JP Projekt
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Bonus Tasks',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme().theme,
-      home: SplashScreen(),
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 82, 34, 133))),
+      //home: const Bonus1In442(),
+      //home: const Aufgabe1In443(),
+      //home: const Bonus1In443(),
+      //home: Gallery(),
+      home: TimerAppScreen(),
     );
   }
+
+  //   // JP Projekt
+  //   @override
+  //   Widget build(BuildContext context) {
+  //     return MaterialApp(
+  //       title: 'Bonus Tasks',
+  //       debugShowCheckedModeBanner: false,
+  //       theme: AppTheme().theme,
+  //       home: SplashScreen(),
+  //     );
+  //   }
 }
