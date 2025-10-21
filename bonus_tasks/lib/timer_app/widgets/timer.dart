@@ -17,9 +17,8 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   @override
   void initState() {
     super.initState();
-    controller = ref.read(timerNotifierProvider).input == 0
-        ? TextEditingController()
-        : TextEditingController(text: ref.read(timerNotifierProvider).input.toString());
+    final provider = ref.read(timerNotifierProvider);
+    controller = !provider.isRunning ? TextEditingController() : TextEditingController(text: provider.input.toString());
   }
 
   @override
