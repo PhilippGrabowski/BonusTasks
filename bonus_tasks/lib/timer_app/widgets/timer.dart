@@ -36,7 +36,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
       if (previous != null && previous.seconds > 0 && next.seconds == 0 && previous.isRunning) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Timer von ${controller.text} Sekunden ist abgelaufen', textAlign: TextAlign.center),
+            content: Text('Timer von ${previous.input} Sekunden ist abgelaufen', textAlign: TextAlign.center),
             duration: Duration(seconds: 2),
           ),
         );

@@ -25,8 +25,8 @@ class StopwatchNotifier extends Notifier<StopwatchState> {
   void startStopwatch() {
     if (state.isRunning) return;
     state = state.copyWith(isRunning: true);
-    _timer = Timer.periodic(const Duration(milliseconds: 1), (_) {
-      state = state.copyWith(milliSeconds: state.milliSeconds + 1);
+    _timer = Timer.periodic(const Duration(milliseconds: 10), (_) {
+      state = state.copyWith(milliSeconds: state.milliSeconds + 10);
     });
   }
 
