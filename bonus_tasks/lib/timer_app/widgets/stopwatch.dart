@@ -3,30 +3,11 @@ import 'package:bonus_tasks/timer_app/notifier/timer_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StopwatchWidget extends ConsumerStatefulWidget {
+class StopwatchWidget extends ConsumerWidget {
   const StopwatchWidget({super.key});
 
   @override
-  ConsumerState<StopwatchWidget> createState() => _StopwatchWidgetState();
-}
-
-class _StopwatchWidgetState extends ConsumerState<StopwatchWidget> {
-  late final TextEditingController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final stopwatchState = ref.watch(stopwatchNotifierProvider);
     final stopwatchNotifier = ref.read(stopwatchNotifierProvider.notifier);
 
@@ -34,7 +15,7 @@ class _StopwatchWidgetState extends ConsumerState<StopwatchWidget> {
       if (previous != null && previous.seconds > 0 && next.seconds == 0 && previous.isRunning) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Timer von ${controller.text} Sekunden ist abgelaufen', textAlign: TextAlign.center),
+            content: Text('Timer von ${previous.input} Sekunden ist abgelaufen', textAlign: TextAlign.center),
             duration: Duration(seconds: 2),
           ),
         );
