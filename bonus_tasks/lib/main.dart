@@ -2,6 +2,7 @@ import 'package:bonus_tasks/4.4.2/bonus/bonus1.dart';
 import 'package:bonus_tasks/4.4.3/aufgabe1.dart';
 import 'package:bonus_tasks/4.4.3/bonus/bonus1.dart';
 import 'package:bonus_tasks/4.5.5/gallery.dart';
+import 'package:bonus_tasks/api_project/dog_api.dart';
 import 'package:bonus_tasks/jp_project/Theme/theme.dart';
 import 'package:bonus_tasks/jp_project/screens/splash_screen/splash_screen.dart';
 import 'package:bonus_tasks/timer_app/timer_app.dart';
@@ -26,7 +27,8 @@ class App extends StatelessWidget {
       //home: const Aufgabe1In443(),
       //home: const Bonus1In443(),
       //home: Gallery(),
-      home: TimerAppScreen(),
+      //home: TimerAppScreen(),
+      home: DogApi(),
     );
   }
 
