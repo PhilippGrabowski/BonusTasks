@@ -37,7 +37,7 @@ class _DogApiState extends State<DogApi> {
     try {
       final response = await http.get(uri);
       final json = convert.jsonDecode(response.body);
-      setState(() => imagePathList = List<String>.from(json['message']));
+      imagePathList = List<String>.from(json['message']);
     } catch (_) {}
   }
 
@@ -85,7 +85,7 @@ class _DogApiState extends State<DogApi> {
                 imagePathList = [];
               }),
               dropdownMenuEntries: [
-                DropdownMenuEntry<String>(value: '', label: 'Select breed'),
+                DropdownMenuEntry<String>(value: '', label: '--Select--'),
                 ...breeds.map((breed) {
                   return DropdownMenuEntry<String>(value: breed, label: getBreed(breed));
                 }),
