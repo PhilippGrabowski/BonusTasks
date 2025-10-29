@@ -26,7 +26,7 @@ class _DogApiState extends State<DogApi> {
     try {
       final response = await http.get(uri);
       final json = convert.jsonDecode(response.body);
-      final map = json['message'];
+      final map = json['message'] as Map<String, dynamic>;
       setState(() => breeds = map.keys.toList());
     } catch (_) {}
   }
