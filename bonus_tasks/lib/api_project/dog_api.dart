@@ -1,109 +1,53 @@
+import 'package:bonus_tasks/api_project/notifier/dog_api_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DogApi extends StatefulWidget {
+class DogApi extends ConsumerWidget {
   const DogApi({super.key});
-
-  @override
-  State<DogApi> createState() => _DogApiState();
-}
-
-class _DogApiState extends State<DogApi> {
-  List<String> breeds = [];
-  String? selectedBreed;
-  List<String> imagePathList = [];
-  String? imagePath;
-
-  @override
-  void initState() {
-    super.initState();
-    loadBreeds();
-  }
-
-  Future<void> loadBreeds() async {
-    final uri = Uri.parse('https://dog.ceo/api/breeds/list/all');
-    try {
-      final response = await http.get(uri);
-      final json = convert.jsonDecode(response.body);
-      final map = json['message'] as Map<String, dynamic>;
-      setState(() => breeds = map.keys.toList());
-    } catch (_) {}
-  }
-
-  Future<void> loadImagesForBreed() async {
-    if (selectedBreed == null) return;
-    final uri = Uri.parse('https://dog.ceo/api/breed/$selectedBreed/images');
-    try {
-      final response = await http.get(uri);
-      final json = convert.jsonDecode(response.body);
-      imagePathList = List<String>.from(json['message']);
-    } catch (_) {}
-  }
-
-  Future<void> loadRandomImage() async {
-    final uri = Uri.parse('https://dog.ceo/api/breeds/image/random');
-    try {
-      final response = await http.get(uri);
-      final json = convert.jsonDecode(response.body);
-      setState(() => imagePath = json['message']);
-    } catch (_) {}
-  }
-
-  Future<void> getRandomImage() async {
-    if (selectedBreed == null) {
-      loadRandomImage();
-      return;
-    }
-    if (imagePathList.isEmpty) {
-      await loadImagesForBreed();
-    }
-    if (imagePathList.isNotEmpty) {
-      setState(() => imagePath = (imagePathList..shuffle()).first);
-    }
-  }
 
   String getBreed(String name) {
     return name[0].toUpperCase() + name.substring(1);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dogApiState = ref.watch(dogApiNotifierProvider);
+    final dogApiNotifier = ref.read(dogApiNotifierProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: Text('Dog API')),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 20),
             DropdownMenu<String>(
-              initialSelection: selectedBreed,
+              initialSelection: dogApiState.selectedBreed,
               hintText: 'Select breed',
               menuHeight: 200,
-              onSelected: (value) => setState(() {
-                selectedBreed = value == '' ? null : value;
-                imagePathList = [];
-              }),
+              onSelected: (value) => dogApiNotifier.setSelectedBreed(value),
               dropdownMenuEntries: [
                 DropdownMenuEntry<String>(value: '', label: '--Select--'),
-                ...breeds.map((breed) {
+                ...dogApiState.breeds.map((breed) {
                   return DropdownMenuEntry<String>(value: breed, label: getBreed(breed));
                 }),
               ],
             ),
-            SizedBox(height: 20),
-            FilledButton(onPressed: getRandomImage, child: Text('Get Random Dog')),
-            SizedBox(height: 40),
+            SizedBox(height: 80),
             Container(
               width: 300,
-              height: 200,
+              height: 400,
               decoration: BoxDecoration(
                 border: Border.all(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.5)),
               ),
-              child: imagePath == null
-                  ? Center(child: Text('Press Button to load Image'))
-                  : Image.network(imagePath!, fit: BoxFit.cover),
+              child: dogApiState.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : dogApiState.imagePath == null
+                  ? const Center(child: Text('Press Button to load Image'))
+                  : Image.network(dogApiState.imagePath!, fit: BoxFit.cover),
             ),
+            SizedBox(height: 40),
+            FilledButton(onPressed: dogApiNotifier.getRandomImage, child: Text('Get Random Dog')),
           ],
         ),
       ),
