@@ -23,7 +23,7 @@ class DogApi extends ConsumerWidget {
             SizedBox(height: 20),
             DropdownMenu<String>(
               initialSelection: dogApiState.selectedBreed,
-              hintText: 'Select breed',
+              hintText: '--Select--',
               menuHeight: 200,
               onSelected: (value) => dogApiNotifier.setSelectedBreed(value),
               dropdownMenuEntries: [
@@ -47,7 +47,7 @@ class DogApi extends ConsumerWidget {
                   : Image.network(dogApiState.imagePath!, fit: BoxFit.cover),
             ),
             SizedBox(height: 40),
-            FilledButton(onPressed: dogApiNotifier.getRandomImage, child: Text('Get Random Dog')),
+            FilledButton(onPressed: dogApiNotifier.loadRandomImage, child: Text('Get Random Dog')),
           ],
         ),
       ),
